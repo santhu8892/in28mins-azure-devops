@@ -12,6 +12,19 @@ steps:
 
 - task: TerraformCLI@0
   inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    backendType: 'azurerm'
+    backendServiceArm: 'azure_dai_welsh'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'terraform-backend-rg'
+    backendAzureRmResourceGroupLocation: 'westeurope'
+    backendAzureRmStorageAccountName: 'terraformbackenddaiwelsh'
+    backendAzureRmContainerName: 'terraformbackendcontainer'
+    backendAzureRmKey: 'kuberbnetes-dev.tfstate'
+
+- task: TerraformCLI@0
+  inputs:
     command: 'destroy'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
     environmentServiceName: 'azure_dai_welsh'
